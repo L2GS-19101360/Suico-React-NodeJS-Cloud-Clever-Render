@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
     res.send("Hello World!");
 });
 
+const personRoutes = require('./src/routes/persons.routes');
+
+app.use('/api/v1/persons', personRoutes);
+
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
