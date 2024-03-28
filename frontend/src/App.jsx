@@ -1,21 +1,42 @@
-import { Component, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
-import { Navbar, Container } from 'react-bootstrap';
+import { Component, useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { Navbar, Container } from 'react-bootstrap'
+import CreatePersonModal from './components/CreatePersonModal'
+import SearchBar from './components/SearchBar'
+import PersonsTable from './components/PersonsTable'
 
 class App extends Component {
-  constructor(){
+
+  constructor() {
     super();
   }
 
-  render(){
-    return(
-      <div style={{ backgroundColor: 'lightblue' }}>
-        {/* Your page content goes here */}
+  componentDidMount() {
+
+  }
+  componentWillUnmount() {
+
+  }
+
+  render() {
+    return (
+      <div>
+        <Navbar className="bg-body-tertiary">
+          <Container>
+            <Navbar.Brand>SNAP Person List</Navbar.Brand>
+          </Container>
+        </Navbar>
+        <div style={{ padding: '1%', display: "flex", width: "100%" }}>
+          <CreatePersonModal /> &nbsp;&nbsp;&nbsp;
+          <SearchBar />
+        </div>
+        <PersonsTable />
       </div>
     );
   }
+
 }
 
-export default App;
+export default App
