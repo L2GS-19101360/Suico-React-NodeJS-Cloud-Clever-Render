@@ -1,12 +1,15 @@
 import { Component, useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import { Button, Modal, Form } from 'react-bootstrap'
+import axios from 'axios';
 
 class CreatePersonModal extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            show: false
+            show: false,
+            newFirstName: "",
+            newLastName: ""
         };
     }
 
@@ -15,6 +18,10 @@ class CreatePersonModal extends Component {
     }
     componentWillUnmount() {
 
+    }
+
+    toCreatePerson = (event) => {
+        console.log(this.state.newFirstName + this.state.newLastName);
     }
 
     handleClose = () => {
@@ -38,7 +45,23 @@ class CreatePersonModal extends Component {
                         <Modal.Title>Create New Person</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        
+                        <Form>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Enter First Name"
+                                name='newFirstName'
+                                value={this.state.newFirstName}
+                                onChange={(e) => this.setState({newFirstName: e.target.value})} />
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Enter Last Name" 
+                                name='newLastName'
+                                value={this.state.newLastName}
+                                onChange={(e) => this.setState({newLastName: e.target.value})}/><br/>
+                            <Button variant="success" onClick={this.toCreatePerson}>Create Person</Button>
+                        </Form>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>

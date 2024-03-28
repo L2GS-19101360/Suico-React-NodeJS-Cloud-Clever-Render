@@ -4,6 +4,7 @@ import { Navbar, Container } from 'react-bootstrap'
 import CreatePersonModal from './components/CreatePersonModal'
 import SearchBar from './components/SearchBar'
 import PersonsTable from './components/PersonsTable'
+import ClockComponent from './components/ClockComponent'
 
 class App extends Component {
 
@@ -24,9 +25,10 @@ class App extends Component {
         <Navbar className="bg-body-tertiary">
           <Container>
             <Navbar.Brand>SNAP Person List</Navbar.Brand>
+            <Navbar.Brand><ClockComponent/></Navbar.Brand>
           </Container>
         </Navbar>
-        <div style={{ padding: '1%', display: "flex", width: "100%" }}>
+        <div style={{ padding: '1%', display: "flex", width: "100%", marginTop: "15px" }}>
           <CreatePersonModal /> &nbsp;&nbsp;&nbsp;
           <SearchBar />
         </div>

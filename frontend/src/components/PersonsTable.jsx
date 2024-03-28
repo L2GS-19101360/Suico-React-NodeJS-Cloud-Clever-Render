@@ -1,14 +1,27 @@
 import { Component, useState } from 'react'
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
+import axios from 'axios';
 
 class PersonsTable extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            persons: []
+        }
     }
 
     componentDidMount() {
-
+        axios.get('https://react-node-mysql-api.onrender.com/api/v1/persons')
+            .then(response => {
+                this.setState({
+                    persons: response.data.data
+                });
+                console.log(response.data.data);
+            })
+            .catch(error => {
+                console.error('Error fetching data: ', error);
+            });
     }
     componentWillUnmount() {
 
@@ -17,7 +30,7 @@ class PersonsTable extends Component {
     render() {
         return (
             <div>
-                <Table striped bordered hover variant="dark">
+                <Table striped bordered hover>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -28,7 +41,15 @@ class PersonsTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        {this.state.persons.map(person => (
+                            <tr key={person.id}>
+                                <td>{person.id}</td>
+                                <td>{person.firstname}</td>
+                                <td>{person.lastname}</td>
+                                <td><Button variant="warning">Update</Button></td>
+                                <td><Button variant="danger">Delete</Button></td>
+                            </tr>
+                        ))}
                     </tbody>
                 </Table>
             </div>

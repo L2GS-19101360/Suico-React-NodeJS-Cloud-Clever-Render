@@ -19,10 +19,10 @@ class SearchBar extends Component {
             <div>
                 <InputGroup className="mb-3">
                     <Form.Control
-                        placeholder="Recipient's username"
-                        aria-label="Recipient's username"
+                        placeholder="Enter Person"
+                        aria-label="Enter Person"
                         aria-describedby="basic-addon2"
-                        style={{width: "1000px"}}
+                        style={{width: "750px"}}
                     />
                     <Button variant="primary" id="button-addon2">
                         Search
