@@ -20,8 +20,23 @@ class CreatePersonModal extends Component {
 
     }
 
-    toCreatePerson = (event) => {
-        console.log(this.state.newFirstName + this.state.newLastName);
+    toCreatePerson = () => {
+        const { newFirstName, newLastName } = this.state;
+        axios.post(
+            'https://react-node-mysql-api.onrender.com/api/v1/persons/', {
+            firstName: newFirstName, // Corrected key names
+            lastName: newLastName    // Corrected key names
+        }
+        ).then(
+            response => {
+                console.log('New person created:', response.data);
+                this.handleClose(); // Close the modal after successful creation
+            }
+        ).catch(
+            error => {
+                console.error('Error creating new person:', error);
+            }
+        );
     }
 
     handleClose = () => {
@@ -47,19 +62,19 @@ class CreatePersonModal extends Component {
                     <Modal.Body>
                         <Form>
                             <Form.Label>First Name</Form.Label>
-                            <Form.Control 
-                                type="text" 
+                            <Form.Control
+                                type="text"
                                 placeholder="Enter First Name"
                                 name='newFirstName'
                                 value={this.state.newFirstName}
-                                onChange={(e) => this.setState({newFirstName: e.target.value})} />
+                                onChange={(e) => this.setState({ newFirstName: e.target.value })} />
                             <Form.Label>Last Name</Form.Label>
-                            <Form.Control 
-                                type="text" 
-                                placeholder="Enter Last Name" 
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter Last Name"
                                 name='newLastName'
                                 value={this.state.newLastName}
-                                onChange={(e) => this.setState({newLastName: e.target.value})}/><br/>
+                                onChange={(e) => this.setState({ newLastName: e.target.value })} /><br />
                             <Button variant="success" onClick={this.toCreatePerson}>Create Person</Button>
                         </Form>
                     </Modal.Body>
