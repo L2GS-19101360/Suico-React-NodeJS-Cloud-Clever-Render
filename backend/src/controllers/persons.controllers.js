@@ -2,6 +2,18 @@
 
 const Person = require('../models/persons.models');
 
+exports.findByInput = function (req, res) {
+    Person.findByInput(req.params.input, function (err, person) {
+        if (err) {
+            res.send(err);
+        }
+        res.json({
+            status: 200,
+            data: person
+        });
+    });
+}
+
 exports.update = function (req, res) {
     if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
         res.status(400).send({
