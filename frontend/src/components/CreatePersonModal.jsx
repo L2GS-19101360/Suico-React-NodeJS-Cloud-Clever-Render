@@ -20,21 +20,27 @@ class CreatePersonModal extends Component {
 
     }
 
-    toCreatePerson = () => {
-        const { newFirstName, newLastName } = this.state;
-        axios.post(
-            'https://react-node-mysql-api.onrender.com/api/v1/persons/', {
-            firstName: newFirstName, // Corrected key names
-            lastName: newLastName    // Corrected key names
+    toCreatePerson = async () => {
+        event.preventDefault();
+
+        console.log(this.state.newFirstName + this.state.newLastName);
+
+        const person = {
+            firstname: this.state.newFirstName,
+            lastname: this.state.newLastName
         }
+
+        axios.post(
+            'https://react-node-mysql-api.onrender.com/api/v1/persons/', 
+            person 
         ).then(
-            response => {
-                console.log('New person created:', response.data);
-                this.handleClose(); // Close the modal after successful creation
+            (response) => {
+                console.log("Server Response", response.data);
+                window.location.reload();
             }
         ).catch(
-            error => {
-                console.error('Error creating new person:', error);
+            (error) => {
+                console.log(error);
             }
         );
     }
@@ -75,7 +81,7 @@ class CreatePersonModal extends Component {
                                 name='newLastName'
                                 value={this.state.newLastName}
                                 onChange={(e) => this.setState({ newLastName: e.target.value })} /><br />
-                            <Button variant="success" onClick={this.toCreatePerson}>Create Person</Button>
+                            <Button variant="success" type='submit' onClick={this.toCreatePerson}>Create Person</Button>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>

@@ -27,6 +27,10 @@ class PersonsTable extends Component {
 
     }
 
+    toDeletePerson = async (id) => {
+        console.log(id);
+    }
+
     render() {
         return (
             <div>
@@ -47,7 +51,7 @@ class PersonsTable extends Component {
                                 <td>{person.firstname}</td>
                                 <td>{person.lastname}</td>
                                 <td><Button variant="warning">Update</Button></td>
-                                <td><Button variant="danger">Delete</Button></td>
+                                <td><Button variant="danger" onClick={() => this.toDeletePerson(person.id)}>Delete</Button></td>
                             </tr>
                         ))}
                     </tbody>
