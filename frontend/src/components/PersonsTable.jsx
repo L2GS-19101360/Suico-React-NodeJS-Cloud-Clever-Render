@@ -69,6 +69,24 @@ class PersonsTable extends Component {
         event.preventDefault();
 
         console.log(this.state.selectedID + this.state.selectedFirstName + this.state.selectedLastName);
+
+        const newInfo = {
+            firstname: this.state.selectedFirstName,
+            lastname: this.state.selectedLastName
+        }
+
+        axios.put(
+            `https://react-node-mysql-api.onrender.com/api/v1/persons/${this.state.selectedID}`, newInfo
+        ).then(
+            (response) => {
+                console.log("Server Response", response.data);
+                window.location.reload();
+            }
+        ).catch(
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     render() {
@@ -114,7 +132,7 @@ class PersonsTable extends Component {
                                 type="text"
                                 name='newFirstName'
                                 value={this.state.selectedLastName}
-                                onChange={(e) => this.setState({ selectedLastName: e.target.value })} /><br/>
+                                onChange={(e) => this.setState({ selectedLastName: e.target.value })} /><br />
                             <Button variant="warning" type='submit' onClick={this.toUpdatePerson}>Create Person</Button>
                         </Form>
                     </Modal.Body>
