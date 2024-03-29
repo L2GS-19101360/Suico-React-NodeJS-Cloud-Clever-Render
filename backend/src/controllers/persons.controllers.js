@@ -2,6 +2,26 @@
 
 const Person = require('../models/persons.models');
 
+exports.update = function(req, res){
+    if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
+        res.status(400).send({
+            error: true,
+            message: "Enter All Information"
+        });
+    } else {
+        Person.update(req.params.id, new Person(req.body), function(err, person){
+            if (err) {
+                res.send(err);
+            }
+            res.json({
+                error: false,
+                status: 200,
+                message: "Person Updated!"
+            });
+        });
+    }
+}
+
 exports.delete = function (req, res) {
     Person.delete(req.params.id, function (err, person) {
         if (err) {
