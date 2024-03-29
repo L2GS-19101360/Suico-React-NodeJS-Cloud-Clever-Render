@@ -9,7 +9,7 @@ const Person = function (person) {
 }
 
 Person.findByInput = function (input, result) {
-    dbConn.query("SELECT * FROM persons WHERE firstname = ? OR lastname = ?", input, function (err, res) {
+    dbConn.query("SELECT * FROM persons WHERE firstname = ? OR lastname = ?", [input, input], function (err, res) {
         if (err) {
             console.log("Error: ", err);
             result(err, null);
