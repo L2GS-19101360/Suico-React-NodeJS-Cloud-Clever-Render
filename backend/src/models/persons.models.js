@@ -8,17 +8,20 @@ const Person = function (person) {
     this.updated = null;
 }
 
-Person.update = function (id, person, result) {
-    dbConn.query("UPDATE persons SET firstname = ?, lastname = ?, updated = ? WHERE id = ?", [person.firstname, person.lastname, new Date(), person.id], function (err, res) {
-        if (err) {
-            console.log("Error: ", err);
-            result(null, err);
-        } else {
-            result(null, res);
+Person.update = function(id, person, result) {
+    dbConn.query(
+        "UPDATE persons SET firstname = ?, lastname = ?, updated = ? WHERE id = ?",
+        [person.firstname, person.lastname, new Date(), id],
+        function(err, res) {
+            if (err) {
+                console.log("Error: ", err);
+                result(err, null);
+            } else {
+                result(null, res);
+            }
         }
-    });
-}
-
+    );
+};
 Person.delete = function (id, result) {
     dbConn.query("DELETE FROM persons WHERE id = ?", [id], function (err, res) {
         if (err) {
