@@ -28,9 +28,8 @@ class App extends Component {
             <Navbar.Brand><ClockComponent/></Navbar.Brand>
           </Container>
         </Navbar>
-        <div style={{ padding: '1%', display: "flex", width: "100%", marginTop: "15px" }}>
-          <CreatePersonModal /> &nbsp;&nbsp;&nbsp;
-          <SearchBar />
+        <div style={{ marginTop: "20px", paddingLeft: "2%", paddingRight: "2%", display: "inline-flex", gap: "20px" }}>
+          <CreatePersonModal />
         </div>
         <PersonsTable />
       </div>
